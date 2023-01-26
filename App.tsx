@@ -8,7 +8,9 @@ import {
 } from '@expo-google-fonts/inter'
 
 import { Loading } from './src/components/Loading'
-import { Home } from './src/screens/Home'
+import { Home } from './src/screens/HomeScreen'
+
+// import './src/styles/global.css'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
