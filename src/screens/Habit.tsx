@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 
 import BackButton from '../components/BackButton'
 import { ProgressBar } from '../components/ProgressBar'
+import { Checkbox } from '../components/Checkbox'
 
 interface HabitParams {
   date: string
@@ -31,6 +32,11 @@ export function Habit() {
         </Text>
 
         <ProgressBar progress={42} />
+
+        <View className="mt-6">
+          <Checkbox title="Beber 2L de água" checked />
+          <Checkbox title="Treinar" />
+        </View>
       </ScrollView>
     </View>
   )
