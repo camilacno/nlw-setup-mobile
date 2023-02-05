@@ -24,10 +24,10 @@ export function Habit() {
         contentContainerStyle={{ paddingBottom: 100 }}
       >
         <BackButton />
-        <Text className="mt-6 text-zinc-400 font-semibold text-base lowercase">
+        <Text className="mt-6 text-zinc-100 font-semibold text-base lowercase">
           {weekDay}
         </Text>
-        <Text className="text-white font-extrabold text-3xl">
+        <Text className="text-gray-600 font-extrabold text-3xl">
           {dayOfTheMonth}
         </Text>
 

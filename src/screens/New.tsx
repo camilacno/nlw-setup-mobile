@@ -54,7 +54,7 @@ export function New() {
         <TextInput
           placeholderTextColor={colors.zinc[400]}
           placeholder="Exercícios, dormir bem, etc..."
-          className="h-12 pl-4 rounded-lg mt-3 bg-zinc-800 text-white focus:border-2 focus:border-green-600"
+          className="h-12 pl-4 rounded-lg mt-3 bg-gray-500 text-white border-2 border-gray-600 focus:border-gray-700"
         />
 
         <Text className="mt-4 mb-3 text-white font-semibold text-base">
@@ -72,7 +72,7 @@ export function New() {
 
         <TouchableOpacity
           activeOpacity={0.7}
-          className="w-full mt-6 h-14 rounded-lg flex-row items-center justify-center bg-green-600 font-semibold hover:bg-green-500"
+          className="w-full mt-6 h-14 rounded-lg flex-row items-center justify-center bg-gray-600 font-semibold hover:bg-gray-500"
         >
           <Feather name="check" size={20} color={colors.white} />
           <Text className="text-white font-semibold text-base ml-2">

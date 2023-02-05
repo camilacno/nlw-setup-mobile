@@ -22,7 +22,7 @@ export function Home() {
       <View className="flex-row mt-6 mb-2">
         {weekDays.map((weekday, i) => (
           <Text
-            className="text-zinc-400 text-xl font-bold text-center m-1"
+            className="text-zinc-100 text-xl font-bold text-center m-1"
             style={{ width: DAY_SIZE }}
             key={`${weekday} - ${i}`}
           >

@@ -14,10 +14,10 @@ export function Header() {
       <TouchableOpacity
         onPress={() => navigate('new')}
         activeOpacity={0.7}
-        className="flex-row h-11 px-4 border border-violet-500 rounded-lg items-center"
+        className="flex-row h-11 px-4 border border-cyan-300 rounded-lg items-center"
       >
-        <Feather name="plus" color={colors.violet[500]} size={20} />
-        <Text className="text-white ml-3 font-semibold text-base">Novo</Text>
+        <Feather name="plus" color={colors.cyan[300]} size={20} />
+        <Text className="text-zinc-100 ml-3 font-semibold text-base">Novo</Text>
       </TouchableOpacity>
     </View>
   )
