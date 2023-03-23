@@ -8,7 +8,7 @@ import { Feather } from '@expo/vector-icons'
 import colors from 'tailwindcss/colors'
 
 interface CheckboxProps extends TouchableOpacityProps {
-  checked: boolean
+  checked?: boolean
   title: string
 }
 

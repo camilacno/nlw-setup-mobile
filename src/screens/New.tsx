@@ -9,7 +9,7 @@ import {
 import { Feather } from '@expo/vector-icons'
 import colors from 'tailwindcss/colors'
 
-import BackButton from '../components/BackButton'
+import { BackButton } from '../components/BackButton'
 import { Checkbox } from '../components/Checkbox'
 
 const availableWeekDays = [
