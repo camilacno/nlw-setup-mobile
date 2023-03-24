@@ -5,7 +5,12 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Platform,
+  Button,
 } from 'react-native'
+import DateTimePicker, {
+  Event as DateTimePickerEvent,
+} from '@react-native-community/datetimepicker'
 import { Feather } from '@expo/vector-icons'
 import colors from 'tailwindcss/colors'
 
@@ -24,6 +29,19 @@ const availableWeekDays = [
 
 export function New() {
   const [weekDays, setWeekDays] = useState<number[]>([])
+  const [time, setTime] = useState<Date>(new Date())
+  const [showPicker, setShowPicker] = useState<boolean>(false)
+
+  const onTimeChange = (event: DateTimePickerEvent, selectedTime?: Date) => {
+    setShowPicker(false)
+    if (selectedTime) {
+      setTime(selectedTime)
+    }
+  }
+
+  const showTimePicker = () => {
+    setShowPicker(true)
+  }
 
   function handleToggleWeekDays(weekDayIndex: number) {
     if (weekDays.includes(weekDayIndex)) {
@@ -69,6 +87,24 @@ export function New() {
             onPress={() => handleToggleWeekDays(index)}
           />
         ))}
+
+        <Button onPress={showTimePicker} title="Lembrar-me no horário:" />
+        <Text>
+          Horário selecionado:
+          {`${time.getHours().toString().padStart(2, '0')}:${time
+            .getMinutes()
+            .toString()
+            .padStart(2, '0')}`}
+        </Text>
+        {showPicker && (
+          <DateTimePicker
+            value={time}
+            mode="time"
+            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+            onChange={onTimeChange}
+            is24Hour
+          />
+        )}
 
         <TouchableOpacity
           activeOpacity={0.7}
