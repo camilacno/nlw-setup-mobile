@@ -4,7 +4,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#0c92a5',
+        background: '#0C6B7C',
+
+        white: '#ffffff',
+        secondary: '#95B0B7',
+        buttonPrimary: '#324A51',
+        buttonSecondary: '#95B0B7',
+        checkbox: '#33a1b8',
       },
       fontFamily: {
         regular: 'Inter_400Regular',

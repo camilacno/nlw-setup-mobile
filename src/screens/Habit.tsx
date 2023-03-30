@@ -32,30 +32,24 @@ export function Habit() {
 
   const route = useRoute()
   const { date } = route.params as Params
+  const dateWithHour = dayjs(date).set('hour', 3).toISOString()
 
   const parsedDate = dayjs(date)
   const isDateInPast = parsedDate.endOf('day').isBefore(new Date())
   const dayOfWeek = parsedDate.format('dddd')
   const dayAndMonth = parsedDate.format('DD/MM')
 
-  // const habitsProgress = dayInfo?.possibleHabits?.length
-  //   ? generateProgressPercentage(
-  //       dayInfo.possibleHabits.length,
-  //       completedHabits.length
-  //     )
-  //   : 0
-
   const habitsProgress = dayInfo?.possibleHabits?.length
     ? generateProgressPercentage(
         dayInfo.possibleHabits.length,
-        completedHabits?.length || 0
+        completedHabits.length
       )
     : 0
 
   async function fetchHabits() {
     try {
       setLoading(true)
-      const response = await api.get('/day', { params: { date } })
+      const response = await api.get('/day', { params: { date: dateWithHour } })
       setDayInfo(response.data)
       setCompletedHabits(response.data.completedHabits ?? [])
     } catch (error) {
@@ -73,24 +67,18 @@ export function Habit() {
     try {
       await api.patch(`/habits/${habitId}/toggle`)
 
-      setCompletedHabits((prevState) => {
-        if (prevState.includes(habitId)) {
-          return prevState.filter((habit) => habit !== habitId)
-        } else {
-          return [...prevState, habitId]
-        }
-      })
+      if (completedHabits?.includes(habitId)) {
+        setCompletedHabits((prevState) =>
+          prevState.filter((habit) => habit !== habitId)
+        )
+      } else {
+        setCompletedHabits((prevState) => [...prevState, habitId])
+      }
     } catch (error) {
       console.log(error)
       Alert.alert('Ops', 'Não foi possível atualizar o status do hábito.')
     }
   }
-
-  useEffect(() => {
-    if (dayInfo) {
-      setCompletedHabits(dayInfo.completedHabits || [])
-    }
-  }, [dayInfo])
 
   useFocusEffect(
     useCallback(() => {
@@ -140,7 +128,13 @@ export function Habit() {
           )}
         </View>
 
-        {isDateInPast && (
+        {dayInfo?.possibleHabits.length === 0 && (
+          <Text className="text-white mt-10 text-center">
+            Não há hábitos cadastrados para este dia.
+          </Text>
+        )}
+
+        {isDateInPast && dayInfo?.possibleHabits.length > 0 && (
           <Text className="text-white mt-10 text-center">
             Você não pode editar hábitos de uma data passada.
           </Text>
