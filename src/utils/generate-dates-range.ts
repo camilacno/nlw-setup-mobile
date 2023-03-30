@@ -12,7 +12,7 @@ export function generateDatesRange() {
     compareDate = compareDate.add(1, 'day')
   }
 
-  return dates
+  return dates.reverse()
 }
 
 //TODO: change initial date to value inputed by the user

@@ -7,10 +7,10 @@ export function Loading() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#0c92a5',
+        backgroundColor: '#09090A',
       }}
     >
-      <ActivityIndicator size="large" color="#FFF" />
+      <ActivityIndicator color="#7C3AED" />
     </View>
   )
 }
