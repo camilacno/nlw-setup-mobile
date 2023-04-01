@@ -68,7 +68,7 @@ export function Home() {
         {weekDays.map((weekDay, i) => (
           <Text
             key={`${weekDay}-${i}`}
-            className="text-zinc-200 text-xl font-bold text-center mx-1"
+            className="text-zinc-100 text-xl font-bold text-center mx-1"
             style={{ width: DAY_SIZE }}
           >
             {weekDay}

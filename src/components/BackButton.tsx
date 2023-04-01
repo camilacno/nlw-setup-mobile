@@ -8,7 +8,7 @@ export function BackButton() {
 
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={() => navigate('home')}>
-      <Feather name="arrow-left" size={32} color={colors.zinc[400]} />
+      <Feather name="arrow-left" size={32} color={colors.teal[200]} />
     </TouchableOpacity>
   )
 }

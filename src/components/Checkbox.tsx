@@ -14,6 +14,9 @@ interface Props extends TouchableOpacityProps {
 }
 
 export function Checkbox({ title, checked = false, ...rest }: Props) {
+  function onPress() {
+    console.log('ícone dentro do checkbox')
+  }
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -22,17 +25,22 @@ export function Checkbox({ title, checked = false, ...rest }: Props) {
     >
       {checked ? (
         <Animated.View
-          className="h-8 w-8 bg-green-500 rounded-lg items-center justify-center"
+          className="h-8 w-8 bg-secondary rounded-lg items-center justify-center"
           entering={ZoomIn}
           exiting={ZoomOut}
         >
           <Feather name="check" size={20} color={colors.white} />
         </Animated.View>
       ) : (
-        <View className="h-8 w-8 bg-zinc-900 rounded-lg" />
+        <View className="h-8 w-8 bg-teal-400 rounded-lg" />
       )}
 
-      <Text className="text-white text-base ml-3 font-semibold">{title}</Text>
+      <View className="flex-row items-center justify-between flex-1 ml-3">
+        <Text className="text-white text-base font-semibold">{title}</Text>
+        <TouchableOpacity onPress={onPress}>
+          <Feather name="arrow-right" size={20} color={colors.white} />
+        </TouchableOpacity>
+      </View>
     </TouchableOpacity>
   )
 }
