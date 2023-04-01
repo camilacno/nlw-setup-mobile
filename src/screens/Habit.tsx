@@ -48,6 +48,8 @@ export function Habit() {
 
   async function fetchHabits() {
     try {
+      console.log('blah')
+
       setLoading(true)
       const response = await api.get('/day', { params: { date: dateWithHour } })
       setDayInfo(response.data)
@@ -97,17 +99,13 @@ export function Habit() {
         contentContainerStyle={{ paddingBottom: 100 }}
       >
         <BackButton />
-
         <Text className="mt-6 text-zinc-400 font-semibold text-base lowercase">
           {dayOfWeek}
         </Text>
-
         <Text className="text-white font-extrabold text-3xl">
-          {dayAndMonth}
+          {dayAndMonth} ({habitsProgress.toFixed(0)}%)
         </Text>
-
         <ProgressBar progress={habitsProgress} />
-
         <View
           className={clsx('mt-6', {
             ['opacity-50']: isDateInPast,
@@ -127,18 +125,18 @@ export function Habit() {
             <HabitsEmpty />
           )}
         </View>
-
-        {dayInfo?.possibleHabits.length === 0 && (
+        {dayInfo?.possibleHabits?.length === 0 && (
           <Text className="text-white mt-10 text-center">
             Não há hábitos cadastrados para este dia.
           </Text>
         )}
-
-        {isDateInPast && dayInfo?.possibleHabits.length > 0 && (
-          <Text className="text-white mt-10 text-center">
-            Você não pode editar hábitos de uma data passada.
-          </Text>
-        )}
+        {isDateInPast &&
+          dayInfo?.possibleHabits &&
+          dayInfo.possibleHabits.length > 0 && (
+            <Text className="text-white mt-10 text-center">
+              Você não pode editar hábitos de uma data passada.
+            </Text>
+          )}
       </ScrollView>
     </View>
   )

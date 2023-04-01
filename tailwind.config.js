@@ -4,13 +4,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#0C6B7C',
-
+        background: '#2596be',
         white: '#ffffff',
-        secondary: '#95B0B7',
-        buttonPrimary: '#324A51',
-        buttonSecondary: '#95B0B7',
-        checkbox: '#33a1b8',
+        secondary: '#0f3c4c',
+        buttonPrimary: '#071e26',
+        buttonSecondary: '#25a5be',
+        checkbox: '#145369',
+        dayHabit: '#041014',
       },
       fontFamily: {
         regular: 'Inter_400Regular',
