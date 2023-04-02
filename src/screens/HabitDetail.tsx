@@ -9,6 +9,8 @@ import {
 } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import colors from 'tailwindcss/colors'
+import CountDown from 'react-native-countdown-component'
+import DateTimePickerModal from 'react-native-modal-datetime-picker'
 
 import { BackButton } from '../components/BackButton'
 import { Checkbox } from '../components/Checkbox'
@@ -24,9 +26,23 @@ const availableWeekDays = [
   'Sábado',
 ]
 
-export function New() {
+export function HabitDetail() {
   const [weekDays, setWeekDays] = useState<number[]>([])
   const [title, setTitle] = useState('')
+
+  const [isPickerVisible, setIsPickerVisible] = useState(false)
+  const [selectedTime, setSelectedTime] = useState('')
+
+  function handleConfirmTime(time) {
+    setSelectedTime(`${time.getHours()}:${time.getMinutes()}`)
+    setIsPickerVisible(false)
+
+    const selectedDate = new Date()
+    selectedDate.setHours(time.getHours())
+    selectedDate.setMinutes(time.getMinutes())
+    setSelectedTime(selectedDate)
+    setIsPickerVisible(false)
+  }
 
   function handleToggleWeekDay(weekDayIndex: number) {
     if (weekDays.includes(weekDayIndex)) {
@@ -59,6 +75,10 @@ export function New() {
     }
   }
 
+  function showModal() {
+    setIsPickerVisible(true)
+  }
+
   return (
     <View className="flex-1 bg-background px-8 pt-16">
       <ScrollView
@@ -68,20 +88,8 @@ export function New() {
         <BackButton />
 
         <Text className="mt-6 text-white font-extrabold text-3xl">
-          Criar hábito
+          Nome do hábito
         </Text>
-
-        <Text className="mt-6 text-white font-semibold text-base">
-          Qual seu comprometimento?
-        </Text>
-
-        <TextInput
-          className="h-12 pl-4 rounded-lg mt-3 bg-teal-400 text-secondary border-2 border-teal-900 focus:border-teal-900"
-          placeholder="Exercícios, dormir bem, etc..."
-          placeholderTextColor={colors.teal[600]}
-          onChangeText={setTitle}
-          value={title}
-        />
 
         <Text className="font-semibold mt-4 mb-3 text-white text-base">
           Qual a recorrência?
@@ -96,6 +104,35 @@ export function New() {
           />
         ))}
 
+        <View className="flex flex-row justify-between items-center">
+          <Text className="font-semibold mt-4 mb-3 text-white text-base">
+            Definir lembrete
+          </Text>
+
+          <TouchableOpacity
+            onPress={showModal}
+            className="bg-teal-400 rounded-md p-3"
+          >
+            <Text className=" text-white font-extrabold text-2xl">
+              {selectedTime
+                ? new Date(selectedTime).toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: undefined,
+                  })
+                : 'Selecione'}
+            </Text>
+          </TouchableOpacity>
+
+          <DateTimePickerModal
+            isVisible={isPickerVisible}
+            mode="time"
+            is24Hour={true}
+            onConfirm={handleConfirmTime}
+            onCancel={() => setIsPickerVisible(false)}
+          />
+        </View>
+
         <TouchableOpacity
           className="w-full h-14 flex-row items-center justify-center bg-secondary rounded-md mt-6"
           activeOpacity={0.7}
@@ -104,7 +141,7 @@ export function New() {
           <Feather name="check" size={20} color={colors.white} />
 
           <Text className="font-semibold text-base text-white ml-2">
-            Confirmar
+            Atualizar hábito
           </Text>
         </TouchableOpacity>
       </ScrollView>

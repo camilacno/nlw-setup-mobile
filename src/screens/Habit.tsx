@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useFocusEffect, useRoute } from '@react-navigation/native'
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native'
 import { Alert, ScrollView, Text, View } from 'react-native'
 import dayjs from 'dayjs'
 import clsx from 'clsx'
@@ -46,6 +50,8 @@ export function Habit() {
       )
     : 0
 
+  const navigation = useNavigation()
+
   async function fetchHabits() {
     try {
       console.log('blah')
@@ -82,6 +88,10 @@ export function Habit() {
     }
   }
 
+  function onPressIcon() {
+    navigation.navigate('habitdetail')
+  }
+
   useFocusEffect(
     useCallback(() => {
       fetchHabits()
@@ -114,11 +124,14 @@ export function Habit() {
           {dayInfo?.possibleHabits ? (
             dayInfo.possibleHabits?.map((habit) => (
               <Checkbox
+                hasIcon
                 key={habit.id}
                 title={habit.title}
                 checked={completedHabits?.includes(habit.id)}
                 onPress={() => handleToggleHabits(habit.id)}
                 disabled={isDateInPast}
+                onPressIcon={onPressIcon}
+                iconDisabled={isDateInPast}
               />
             ))
           ) : (

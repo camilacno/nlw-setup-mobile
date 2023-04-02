@@ -11,12 +11,20 @@ import Animated, { ZoomIn, ZoomOut } from 'react-native-reanimated'
 interface Props extends TouchableOpacityProps {
   title: string
   checked?: boolean
+  hasIcon?: boolean
+  iconDisabled?: boolean
+  onPressIcon?: () => void
 }
 
-export function Checkbox({ title, checked = false, ...rest }: Props) {
-  function onPress() {
-    console.log('ícone dentro do checkbox')
-  }
+export function Checkbox({
+  title,
+  checked = false,
+  hasIcon = false,
+  iconDisabled,
+  onPressIcon,
+  ...rest
+}: Props) {
+  console.log('hasIcon', hasIcon)
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -35,11 +43,13 @@ export function Checkbox({ title, checked = false, ...rest }: Props) {
         <View className="h-8 w-8 bg-teal-400 rounded-lg" />
       )}
 
-      <View className="flex-row items-center justify-between flex-1 ml-3">
-        <Text className="text-white text-base font-semibold">{title}</Text>
-        <TouchableOpacity onPress={onPress}>
-          <Feather name="arrow-right" size={20} color={colors.white} />
-        </TouchableOpacity>
+      <View className="flex flex-row justify-between flex-1">
+        <Text className="text-white text-base ml-3 font-semibold">{title}</Text>
+        {hasIcon && (
+          <TouchableOpacity onPress={onPressIcon} disabled={iconDisabled}>
+            <Feather name="arrow-right" size={20} color={colors.white} />
+          </TouchableOpacity>
+        )}
       </View>
     </TouchableOpacity>
   )

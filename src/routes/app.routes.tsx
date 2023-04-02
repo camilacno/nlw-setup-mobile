@@ -5,6 +5,7 @@ const { Navigator, Screen } = createNativeStackNavigator()
 import { Home } from '../screens/Home'
 import { New } from '../screens/New'
 import { Habit } from '../screens/Habit'
+import { HabitDetail } from '../screens/HabitDetail'
 
 export function AppRoutes() {
   return (
@@ -14,6 +15,8 @@ export function AppRoutes() {
       <Screen name="new" component={New} />
 
       <Screen name="habit" component={Habit} />
+
+      <Screen name="habitdetail" component={HabitDetail} />
     </Navigator>
   )
 }

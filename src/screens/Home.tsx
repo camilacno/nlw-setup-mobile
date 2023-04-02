@@ -1,26 +1,17 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Text, View, ScrollView, Alert } from 'react-native'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
+
 import { api } from '../lib/axios'
 import { generateDatesRange } from '../utils/generate-dates-range'
+
 import { Header } from '../components/Header'
 import { Loading } from '../components/Loading'
 import { HabitDay, DAY_SIZE } from '../components/HabitDay'
 import dayjs from 'dayjs'
 
 const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-const datesFromYearStart = generateDatesRange().sort((a, b) => {
-  const dayOfWeekA = dayjs(a).day()
-  const dayOfWeekB = dayjs(b).day()
-
-  if (dayOfWeekA < dayOfWeekB) {
-    return -1
-  } else if (dayOfWeekA > dayOfWeekB) {
-    return 1
-  } else {
-    return 0
-  }
-})
+const datesFromYearStart = generateDatesRange()
 const minimunSummaryDatesSizes = 18 * 5
 const amountOfDaysToFill = minimunSummaryDatesSizes - datesFromYearStart.length
 
@@ -82,34 +73,10 @@ export function Home() {
       >
         {summary && (
           <View className="flex-row flex-wrap">
-            {weekDays.map((weekDay, i) => {
-              const date = dayjs().day(i).format('YYYY-MM-DD')
-              const dayWithHabits = summary.find((day) => {
-                return dayjs(date).isSame(day.date, 'day')
-              })
-
-              return (
-                <HabitDay
-                  key={date}
-                  date={dayjs(date)}
-                  amountOfHabits={dayWithHabits?.amount}
-                  amountCompleted={dayWithHabits?.completed}
-                  onPress={() => navigate('habit', { date })}
-                />
-              )
-            })}
-
             {datesFromYearStart.map((date) => {
               const dayWithHabits = summary.find((day) => {
                 return dayjs(date).isSame(day.date, 'day')
               })
-
-              if (
-                dayjs(date).format('YYYY-MM-DD') ===
-                dayjs().format('YYYY-MM-DD')
-              ) {
-                return null
-              }
 
               return (
                 <HabitDay

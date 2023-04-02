@@ -4,10 +4,10 @@ import colors from 'tailwindcss/colors'
 import { useNavigation } from '@react-navigation/native'
 
 export function BackButton() {
-  const { navigate } = useNavigation()
+  const { goBack } = useNavigation()
 
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={() => navigate('home')}>
+    <TouchableOpacity activeOpacity={0.7} onPress={() => goBack()}>
       <Feather name="arrow-left" size={32} color={colors.teal[200]} />
     </TouchableOpacity>
   )
