@@ -24,7 +24,6 @@ export default function App() {
 
   async function schedulePushNotification() {
     const schedule = await Notifications.getAllScheduledNotificationsAsync()
-    // console.log('Agendadas: ', schedule)
 
     if (schedule.length > 0) {
       await Notifications.cancelAllScheduledNotificationsAsync()

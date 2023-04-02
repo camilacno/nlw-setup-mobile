@@ -24,7 +24,6 @@ export function Checkbox({
   onPressIcon,
   ...rest
 }: Props) {
-  console.log('hasIcon', hasIcon)
   return (
     <TouchableOpacity
       activeOpacity={0.7}

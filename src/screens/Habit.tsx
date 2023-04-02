@@ -54,8 +54,6 @@ export function Habit() {
 
   async function fetchHabits() {
     try {
-      console.log('blah')
-
       setLoading(true)
       const response = await api.get('/day', { params: { date: dateWithHour } })
       setDayInfo(response.data)
@@ -86,10 +84,6 @@ export function Habit() {
       console.log(error)
       Alert.alert('Ops', 'Não foi possível atualizar o status do hábito.')
     }
-  }
-
-  function onPressIcon() {
-    navigation.navigate('habitdetail')
   }
 
   useFocusEffect(
@@ -130,7 +124,9 @@ export function Habit() {
                 checked={completedHabits?.includes(habit.id)}
                 onPress={() => handleToggleHabits(habit.id)}
                 disabled={isDateInPast}
-                onPressIcon={onPressIcon}
+                onPressIcon={() =>
+                  navigation.navigate('habitdetail', { id: habit.id })
+                }
                 iconDisabled={isDateInPast}
               />
             ))

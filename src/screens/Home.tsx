@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useState } from 'react'
+import dayjs from 'dayjs'
+import { useCallback, useState } from 'react'
 import { Text, View, ScrollView, Alert } from 'react-native'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
-import { api } from '../lib/axios'
 import { generateDatesRange } from '../utils/generate-dates-range'
 
+import { api } from '../lib/axios'
 import { Header } from '../components/Header'
 import { Loading } from '../components/Loading'
 import { HabitDay, DAY_SIZE } from '../components/HabitDay'
-import dayjs from 'dayjs'
 
 const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 const datesFromYearStart = generateDatesRange()
@@ -35,7 +35,7 @@ export function Home() {
       setSummary(response.data)
     } catch (error) {
       Alert.alert('Ops', 'Não foi possível carregar o sumário de hábitos.')
-      console.log('catch getSummary', error)
+      console.log(error)
     } finally {
       setLoading(false)
     }

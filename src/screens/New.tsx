@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import colors from 'tailwindcss/colors'
 import {
   Alert,
   ScrollView,
@@ -8,11 +10,10 @@ import {
   View,
 } from 'react-native'
 import { Feather } from '@expo/vector-icons'
-import colors from 'tailwindcss/colors'
 
+import { api } from '../lib/axios'
 import { BackButton } from '../components/BackButton'
 import { Checkbox } from '../components/Checkbox'
-import { api } from '../lib/axios'
 
 const availableWeekDays = [
   'Domingo',
@@ -27,6 +28,8 @@ const availableWeekDays = [
 export function New() {
   const [weekDays, setWeekDays] = useState<number[]>([])
   const [title, setTitle] = useState('')
+  const [isPickerVisible, setIsPickerVisible] = useState(false)
+  const [selectedTime, setSelectedTime] = useState<Date | undefined>(undefined)
 
   function handleToggleWeekDay(weekDayIndex: number) {
     if (weekDays.includes(weekDayIndex)) {
@@ -57,6 +60,21 @@ export function New() {
       console.log(error)
       Alert.alert('Ops', 'Não foi possível criar o novo hábito')
     }
+  }
+
+  function showModal() {
+    setIsPickerVisible(true)
+  }
+
+  function handleConfirmTime(time: Date) {
+    setSelectedTime(time)
+    setIsPickerVisible(false)
+
+    const selectedDate = new Date()
+    selectedDate.setHours(time.getHours())
+    selectedDate.setMinutes(time.getMinutes())
+    setSelectedTime(selectedDate)
+    setIsPickerVisible(false)
   }
 
   return (
@@ -95,6 +113,33 @@ export function New() {
             onPress={() => handleToggleWeekDay(index)}
           />
         ))}
+
+        <View className="flex flex-row justify-between items-center">
+          <Text className="font-semibold mt-4 mb-3 text-white text-base">
+            Definir lembrete
+          </Text>
+
+          <TouchableOpacity onPress={showModal}>
+            <Text className=" text-white font-extrabold text-2xl">
+              {selectedTime
+                ? new Date(selectedTime)
+                    .toLocaleTimeString([], {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })
+                    .replace(/:\d{2}$/, '')
+                : 'Selecione'}
+            </Text>
+          </TouchableOpacity>
+
+          <DateTimePickerModal
+            isVisible={isPickerVisible}
+            mode="time"
+            is24Hour={true}
+            onConfirm={handleConfirmTime}
+            onCancel={() => setIsPickerVisible(false)}
+          />
+        </View>
 
         <TouchableOpacity
           className="w-full h-14 flex-row items-center justify-center bg-secondary rounded-md mt-6"
