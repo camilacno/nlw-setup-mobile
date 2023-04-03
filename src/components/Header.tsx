@@ -21,6 +21,10 @@ export function Header() {
 
         <Text className="text-white ml-3 font-semibold text-base">Novo</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigate('newupdated')}>
+        <Text className="text-white ml-3 font-semibold text-base">New</Text>
+      </TouchableOpacity>
     </View>
   )
 }

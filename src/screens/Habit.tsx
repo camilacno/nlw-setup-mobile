@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
+import dayjs from 'dayjs'
+import clsx from 'clsx'
+import { Alert, Button, Platform, ScrollView, Text, View } from 'react-native'
 import {
   useFocusEffect,
   useNavigation,
   useRoute,
 } from '@react-navigation/native'
-import { Alert, ScrollView, Text, View } from 'react-native'
-import dayjs from 'dayjs'
-import clsx from 'clsx'
 
 import { api } from '../lib/axios'
 import { generateProgressPercentage } from '../utils/generate-progress-percentage'
