@@ -1,4 +1,4 @@
-- Finish newUpdated layout screen
+- Finish newUpdated layout screen (include form, validation)
 - Refactor newUpdated (separate in components, file is too big)
 - Update prisma schema to include new habit fields
 - Create route do update habit
@@ -6,4 +6,5 @@
 - Update new and edit screens base on newUpdated
 - Check DayHabit colors (not updating to high percentages)
 - imports
-- change places where used stylesheet to tailwind
+- Change places where used stylesheet to tailwind
+- UI refactor

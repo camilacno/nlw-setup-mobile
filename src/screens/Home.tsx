@@ -9,6 +9,7 @@ import { api } from '../lib/axios'
 import { Header } from '../components/Header'
 import { Loading } from '../components/Loading'
 import { HabitDay, DAY_SIZE } from '../components/HabitDay'
+import { HabitDayInactive } from '../components/HabitDayInactive'
 
 const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 const datesFromYearStart = generateDatesRange()
@@ -25,6 +26,7 @@ type SummaryProps = Array<{
 export function Home() {
   const [loading, setLoading] = useState(true)
   const [summary, setSummary] = useState<SummaryProps | null>(null)
+  const [inactiveDays, setInactiveDays] = useState(0)
 
   const { navigate } = useNavigation()
 
@@ -41,9 +43,35 @@ export function Home() {
     }
   }
 
+  function generateDatesRange() {
+    const today = dayjs()
+    setInactiveDays(today.day())
+    const firstDayOfTheWeek = today.startOf('week')
+    const lastDayOfTheWeek = today.endOf('week')
+
+    const dates = []
+    for (let i = 0; i < 7; i++) {
+      const date = firstDayOfTheWeek.add(i, 'day')
+      dates.push(date)
+    }
+
+    const amountOfDaysToFill = minimunSummaryDatesSizes - dates.length
+    if (amountOfDaysToFill > 0) {
+      for (let i = 1; i <= amountOfDaysToFill; i++) {
+        const date = lastDayOfTheWeek.subtract(i, 'day')
+        dates.unshift(date)
+      }
+    }
+
+    dates.sort((a, b) => a.day() - b.day())
+
+    return [dates, inactiveDays]
+  }
+
   useFocusEffect(
     useCallback(() => {
       fetchData()
+      generateDatesRange()
     }, [])
   )
 
@@ -73,6 +101,10 @@ export function Home() {
       >
         {summary && (
           <View className="flex-row flex-wrap">
+            {[...Array(inactiveDays)].map((_, i) => (
+              <HabitDayInactive key={i} />
+            ))}
+
             {datesFromYearStart.map((date) => {
               const dayWithHabits = summary.find((day) => {
                 return dayjs(date).isSame(day.date, 'day')
