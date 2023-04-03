@@ -1,0 +1,9 @@
+- Finish newUpdated layout screen
+- Refactor newUpdated (separate in components, file is too big)
+- Update prisma schema to include new habit fields
+- Create route do update habit
+- Create route to delete habit
+- Update new and edit screens base on newUpdated
+- Check DayHabit colors (not updating to high percentages)
+- imports
+- change places where used stylesheet to tailwind

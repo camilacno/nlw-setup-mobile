@@ -12,9 +12,9 @@ export function WeekDay({ weekDay, ...rest }: WeekDayProps) {
     <TouchableOpacity
       activeOpacity={0.7}
       className={clsx('rounded-lg border m-1', {
-        ['bg-secondary rounded-full w-10 h-10 flex justify-center items-center']:
+        ['bg-background rounded-full w-8 h-8 flex justify-center items-center']:
           isActive,
-        ['bg-background rounded-full w-10 h-10 flex justify-center items-center']:
+        ['bg-gray-300 rounded-full w-8 h-8 flex justify-center items-center']:
           !isActive,
       })}
       onPress={() => setIsactive(!isActive)}
@@ -22,8 +22,8 @@ export function WeekDay({ weekDay, ...rest }: WeekDayProps) {
     >
       <Text
         className={clsx({
-          ['text-1xl text-gray-400 text-2xl font-bold']: isActive,
-          ['text-1xl text-secondary text-2xl font-bold']: !isActive,
+          ['text-1xl text-white font-bold']: isActive,
+          ['text-1xl text-secondary font-bold']: !isActive,
         })}
       >
         {weekDay}
