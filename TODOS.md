@@ -1,10 +1,17 @@
-- Finish newUpdated layout screen (include form, validation)
-- Refactor newUpdated (separate in components, file is too big)
-- Update prisma schema to include new habit fields
-- Create route do update habit
-- Create route to delete habit
-- Update new and edit screens base on newUpdated
-- Check DayHabit colors (not updating to high percentages)
-- imports
-- Change places where used stylesheet to tailwind
-- UI refactor
+[x] Check DayHabit colors (not updating in high percentages)
+[x] Fix summary UI (unfilled days)
+[ ] Define categories
+[ ] Define icons
+[ ] Create category component
+[ ] Finish newUpdated layout screen (include form, validation)
+[ ] Refactor newUpdated (separate in components, file is too big)
+[ ] Update Habit Model
+[ ] Create Category Model
+[ ] Create habit update route
+[ ] Create habit delete route
+[ ] Update habit post route
+[ ] Update 'New' screen base on newUpdated and new routes
+[ ] Update 'Habit' screen base on newUpdated and new routes
+[ ] imports
+[ ] Change places where used stylesheet to tailwind
+[ ] UI refactor
